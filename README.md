@@ -1,3 +1,14 @@
+# Hiro Wallet Sample
+
+Attempting to use hiro wallet to create a customised PSBT, a troubleshooting repo.
+
+The app will ask to log into hiro, access an account for address and publickey details and formulate a simple TX from the users wallet - Need to figure out what simple things are wrong in how Ive attempted to do this for a better understanding of the PBST process.
+
+utilising 1 UTXO, it will try to create a tx that sends 1000 sats to a hardcoded address, and the change back to the sender, after I can get this working in a valid way I'll work on also adding some Counterparty OP RETURN data too.
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
