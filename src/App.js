@@ -102,7 +102,7 @@ function App() {
     console.log({ result });
 
     const tx = btc.Transaction.fromPSBT(hexToBytes(result.result.hex));
-    tx.setFee(estimatedFee)
+    //console.log(tx.fee);
     tx.finalize();
     
 
