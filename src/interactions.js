@@ -124,15 +124,7 @@ export const doSimpleTX = (
 
    const psbtHex =bytesToHex(psbt) 
    console.log({psbtHex});
-
-    // const result = await window.btc.request('signPsbt', {publicKey:user.pubKey.p2wpkh, hex: bytesToHex(psbt)}).catch(err=>{
-    //   console.log({err});
-    //   if(err.error){
-    //    alert(`ERROR: ${err.error.message}`);
-    //   }
-    // });
-    // console.log({result});
-
+    
 
     resolve(psbtHex);
   });

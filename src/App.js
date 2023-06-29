@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import * as btc from "@scure/btc-signer";
 import {
   getUserAddresssDetails,
   connectUser,
@@ -8,6 +9,7 @@ import {
   extractAccountNumber,
   testMempool,
 } from "./interactions";
+import { bytesToHex, hexToBytes } from "@noble/hashes/utils";
 function App() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [user, setUser] = useState(null);
@@ -89,7 +91,7 @@ function App() {
         publicKey: user.pubKey.p2wpkh,
         hex: txHiro,
         account: accountNo,
-        signAtIndex: inputs,
+        signAtIndex: loadedUTXOs.map((e,i)=>i),
       })
       .catch((err) => {
         console.log({ err });
@@ -99,7 +101,12 @@ function App() {
       });
     console.log({ result });
 
-    const testMempoolResponse = await testMempool(result.result.hex).catch(
+    const tx = btc.Transaction.fromPSBT(hexToBytes(result.result.hex));
+    tx.setFee(estimatedFee)
+    tx.finalize();
+    
+
+    const testMempoolResponse = await testMempool(bytesToHex(tx)).catch(
       (err) => {
         console.log(err);
         alert(err.message + " " + err.response.data.error.message);
